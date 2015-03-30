@@ -38,14 +38,13 @@ static NSString * const BaseURLString = @"http://localhost:3000/";
         // 3
         NSLog(@"Request Success %@",responseObject);
         self.workouts = responseObject;
-        //self.weather = (NSDictionary *)responseObject;
         self.title = @"Completed WODs";
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         // 4
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Weather"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
                                                             message:[error localizedDescription]
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"
@@ -114,8 +113,6 @@ static NSString * const BaseURLString = @"http://localhost:3000/";
 {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-    //[dateFormatter setLocale:enUSPOSIXLocale];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     
     
