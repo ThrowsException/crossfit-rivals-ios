@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface DataViewController : UIViewController
+@interface DataViewController : UIViewController <FBLoginViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *dataLabel;
+@property (strong, nonatomic) IBOutlet FBLoginView *loginView;
 @property (strong, nonatomic) id dataObject;
 
 @end
