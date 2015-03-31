@@ -113,6 +113,8 @@ static NSString * const BaseURLString = @"http://localhost:3000/";
 {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:enUSPOSIXLocale];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     
     
@@ -125,11 +127,19 @@ static NSString * const BaseURLString = @"http://localhost:3000/";
     NSDate *date = [dateFormatter dateFromString: s];
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    format.dateFormat = @"MMMM-dd-yyyy";
+    [format setDateStyle:NSDateFormatterShortStyle];
+    [format setTimeStyle:NSDateFormatterNoStyle];
+    //format.dateFormat = @"MM-dd-yyyy";
     
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ | %@",[tempDictionary objectForKey:@"title"], [format stringFromDate:date]];
+    NSString *title = [tempDictionary objectForKey:@"title"];
+    NSDate *date_title = [dateFormatter dateFromString:title];
+    if(date_title != nil)
+    {
+        title = [format stringFromDate:date_title];
+    }
     
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ | %@",title, [format stringFromDate:date]];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Score: %@",[tempDictionary objectForKey:@"score"]];
     
     return cell;
